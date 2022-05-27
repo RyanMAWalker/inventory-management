@@ -161,6 +161,14 @@ def view_stock():
             break
 
  
+def add_stock_to_sheet(add_stock):
+    """
+    Update worksheet with the input stock data to add a new row
+    """
+    print("Updating worksheet")
+    stock_worksheet = SHEET.worksheet("stock")
+    stock_worksheet.append_row(add_stock)
+    print("Stock worksheet updated")
 
 
 def main(): 
@@ -169,5 +177,6 @@ def main():
     """
     user_info = get_user_info()
     options = user_options()
+    add_stock_to_sheet(add_stock())
 
 main()
