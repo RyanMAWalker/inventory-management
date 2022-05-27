@@ -18,7 +18,6 @@ def get_user_info():
     """
     first_name_str = input("Enter your first name: \n")
     last_name_str = input("Enter your last name: \n")
-    print("Only a Manager or Supervisor may access this doccument.")
     job_role_str = input("Enter your job role:")
 
     validate_role(job_role_str)
@@ -26,9 +25,15 @@ def get_user_info():
 
 def validate_role(role):
     """
-    Inside this try, it checks that the role must be a "Supervisor" or "Manager".
+    Inside this try, it checks that the role must be a Manager.
     Raises a TypeError if the string is incorrect.
     """
-    print(role)
+    try:
+        if role.lower() != "manager":
+            raise TypeError(
+                f"Only a Manager may access this doccument.\n"
+            )
+    except TypeError as e:
+        print(f"Invalid job role: {e} please try again.\n")
 
 get_user_info()
