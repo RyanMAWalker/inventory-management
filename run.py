@@ -57,8 +57,18 @@ def user_options():
     print("Please select an option below:\n")
     print("1 - Add Stock")
     print("2 - View Stock")
+    
+    choice = input("Choose option '1' or '2': ")    
+    if choice == "1":
+        add_stock()
+    elif choice == "2":
+        view_stock()
 
-#def add_stock_to_inventory():
+def add_stock():
+    print("add Stock")
+
+def view_stock():
+    print("view Stock")
 
 def main(): 
     """
