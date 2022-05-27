@@ -14,6 +14,15 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('inventory_management_RW')
 
+def isfloat(num):
+    try:
+        float(num)
+        return True
+    except ValueError:
+        return False
+
+
+
 def get_user_info():
     """
     Get user name and role from user.
@@ -66,7 +75,46 @@ def user_options():
             view_stock()
             break
 
+def add_single_item():
+    while True:
+        item_name = input("Item Name: ")
+        if item_name != "":
+            break
+    while True:
+        item_quantity = input("Quantity: ")
+        if item_quantity.isdigit():
+            break
+    while True:
+        item_value = input("Value: ")
+        if isfloat(item_value):
+            break
+
+def add_multiple_items():
+    while True:
+        number_of_items = input("Enter the number of items to be added: ")
+        if number_of_items.isdigit():
+            break
+        number_of_items = int(number_of_items)
+        user_items = {}
+        for i in range(1, number_of_items+1):
+            while True:
+                print()
+                item_name = input("Item Name: ")
+                if item_name != "":
+                    break
+            while True:
+                item_quantity = input("Item Quantity: ")
+                if item_quantity.isdigit():
+                    break
+            while True:
+                item_value = input("Value: ")
+                if isfloat(item_value):
+                    break
+
 def add_stock():
+    """
+    User options for adding one item, or adding multiple.
+    """
     subprocess.run("clear")
     print("Add Stock".upper())
     print("Please select an option below:\n")
@@ -74,45 +122,46 @@ def add_stock():
     print("2 - Add Multiple Items\n")
 
     while True:
-        choice = input("Choose option '1' or '2': ")    
-        if choice in ["1" , "2"]:
+        choice = input("Choose an option: ")
+        if choice in ['1', '2']:
             break
-
-    if choice == "1":
+    if choice == '1':
         print()
-        while True:
-            item_name = input("Item Name: ")
-            if item_name != "":
-                break
-            while True:
-                print("stage 3")
-                item_quantity = input("Quantity: ")
-                if item_quantity.isdigit():
-                    break
-            
+        add_single_item()
+
 
     elif choice == '2':
         print()
-        while True:
-            item_number = input("Enter the number of items to be added: ")
-            if item_number.isdigit():
-                break
-        item_number = int(item_number)
-        user_items = {}
-        for i in range(1, item_number+1):
-            while True:
-                print()
-                item_name = input("Item Name: ")
-                if item_name != '':
-                    break
-            while True:
-                item_quantity = input("Quantity: ")
-                if item_quantity.isdigit():
-                    break
-            user_items.update({item_name: int(item_quantity)})
+        add_multiple_items()
+        user_items.update({item_name: int(item_quantity)})
+
+        addItemsToFile(user_items, clear=False)
+
     
 def view_stock():
-    print("view Stock")
+    """
+    User option for viewing current stock list.
+    Edit and delete functionaility.
+    """
+    subprocess.run("clear")
+    print("View Stock")   
+    print("Choose and Option:")
+    print("1 - Edit Item")
+    print("2 - Delete Item")
+    print()
+    while True:
+        choice = input("Choose option '1' or '2': ")    
+        if choice == "1":
+            print("This will edit")
+            edit_item()
+            break
+        elif choice == "2":
+            print("this will delete")
+            delete_item()
+            break
+
+ 
+
 
 def main(): 
     """
