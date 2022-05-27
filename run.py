@@ -21,6 +21,7 @@ def get_user_info():
     job_role_str = input("Enter your job role:")
 
     validate_role(job_role_str)
+    print(f"Hello, {first_name_str.capitalize()} {last_name_str.capitalize()} your job role is {job_role_str.capitalize()} and can now access the inventory")
 
 
 def validate_role(role):
