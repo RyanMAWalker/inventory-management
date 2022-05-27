@@ -16,13 +16,17 @@ def get_user_info():
     """
     Get user name and role from user
     """
-    first_name_str = input("Enter your first name: \n")
-    last_name_str = input("Enter your last name: \n")
-    job_role_str = input("Enter your job role:")
+    while True: 
+        first_name_str = input("Enter your first name: \n")
+        last_name_str = input("Enter your last name: \n")
+        job_role_str = input("Enter your job role:")
 
-    validate_role(job_role_str)
-    print(f"Hello, {first_name_str.capitalize()} {last_name_str.capitalize()} your job role is {job_role_str.capitalize()} and can now access the inventory")
+        if validate_role(job_role_str):
+            print(f"Hello, {first_name_str.capitalize()} {last_name_str.capitalize()}")
+            print(f"Your job role is {job_role_str.capitalize()} and can now access the inventory")
+            break
 
+        
 
 def validate_role(role):
     """
@@ -36,5 +40,8 @@ def validate_role(role):
             )
     except TypeError as e:
         print(f"Invalid job role: {e} please try again.\n")
+        return False
+
+    return True
 
 get_user_info()
