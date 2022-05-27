@@ -35,12 +35,9 @@ def validate_role(role):
     Inside this try, it checks that the role must be a Manager.
     Raises a TypeError if the string is incorrect.
     """
-    print("Validate roll being called")
     try:
         role = role.lower()
-        print(role)
         if role not in ["manager", "supervisor"]:
-            print("here")
             raise TypeError(
                 "Only a Manager & Supervisor may access this doccument.\n"
             )
@@ -80,30 +77,39 @@ def add_stock():
         choice = input("Choose option '1' or '2': ")    
         if choice in ["1" , "2"]:
             break
+
     if choice == "1":
         print()
         while True:
-            add_num_items = input("Please enter the number of items to be added: ")
-            if add_num_items.isdigit():
+            item_name = input("Item Name: ")
+            if item_name != "":
                 break
-        add_num_items = int(add_num_items)
-        num_items = {}
-        for i in range(1, add_num_items+1):
             while True:
-                print()
-                name_item = input("Item Name: ")
-                if name_item != "":
-                    break
-            while True:
-                item_quantity = input("Quanitity: ")
+                print("stage 3")
+                item_quantity = input("Quantity: ")
                 if item_quantity.isdigit():
                     break
-            while True:
-                item_cost = input("Enter Value (GBP): ")
-                if item_cost.isdigit():
-                    break
-            num_items.update({name_item, int(item_quantity), float(item_cost)})
+            
 
+    elif choice == '2':
+        print()
+        while True:
+            item_number = input("Enter the number of items to be added: ")
+            if item_number.isdigit():
+                break
+        item_number = int(item_number)
+        user_items = {}
+        for i in range(1, item_number+1):
+            while True:
+                print()
+                item_name = input("Item Name: ")
+                if item_name != '':
+                    break
+            while True:
+                item_quantity = input("Quantity: ")
+                if item_quantity.isdigit():
+                    break
+            user_items.update({item_name: int(item_quantity)})
     
 def view_stock():
     print("view Stock")
