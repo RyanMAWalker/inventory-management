@@ -72,27 +72,27 @@ def user_options():
             break
 
 def add_stock():
+    """
+    Gets stock input from the user
+    """
+    subprocess.run("clear")
     print("Please enter the data as the following:")
-    print("Item, Quantity, Price\n")
+    print("Item, Quantity, Price per Item\n")
     print("For Example:")
-    print("Shoes, 2, 26.50")
-
-    stock_str = input("Enter the data here: ")
-    print(f"You have provided: {stock_str}")
-
-    stock_data = stock_str.split(",")
-    validate_stock(stock_data)
-
-def validate_stock(values):
-    print(values)
+    print("Item: Shoes")
+    print("Quantity: 2")
+    print("Price: 26.50 \n")
 
 
+    user_item_name = [input("Enter Item Name: ")]
+    user_item_quan = [input("Enter Item Quantity: ")]
+    user_item_price = [input("Enter Price: ")]
 
+    print(f"{user_item_name}, {user_item_price}, {user_item_quan}")
 
 def main():
 
     get_user_info()
     user_options()
-    add_stock()
 
 main()
